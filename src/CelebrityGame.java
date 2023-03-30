@@ -59,7 +59,8 @@ public class CelebrityGame {
 	 * @param type  What type of celebrity
 	 */
 	public void addCelebrity(String name, String clue, String type) {
-		
+		Celebrity newCeleb = new Celebrity(name, clue);
+		celebGameList.add(newCeleb);
 	}
 
 	/**
@@ -68,7 +69,8 @@ public class CelebrityGame {
 	 * @return If the supplied Celebrity is valid
 	 */
 	public boolean validateCelebrity(String name) {
-		return false; // stub
+		String trimmed = name.trim();
+		return (trimmed.length()>=4);
 	}
 
 	/**
@@ -78,7 +80,8 @@ public class CelebrityGame {
 	 * @return If the clue is valid.
 	 */
 	public boolean validateClue(String clue, String type) {
-		return false; // stub
+		String trimmed = clue.trim();
+		return(trimmed.length()>=10);
 	}
 
 	/**
@@ -87,7 +90,7 @@ public class CelebrityGame {
 	 * @return Remaining number of celebrities
 	 */
 	public int getCelebrityGameSize() {
-		return 0;  // stub
+		return celebGameList.size();
 	}
 
 	/**
