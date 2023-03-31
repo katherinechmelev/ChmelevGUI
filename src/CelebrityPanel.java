@@ -179,6 +179,8 @@ public class CelebrityPanel extends JPanel implements ActionListener{
    */
   private void setupListeners() {
     guessButton.addActionListener(this);
+    countdownTimer.addActionListener(this);
+    countdownTimer.start();
   }
   
   /**
@@ -187,7 +189,12 @@ public class CelebrityPanel extends JPanel implements ActionListener{
    * the end.
    */
   private void timerFires() {
-
+    seconds--;
+    dynamicTimerLabel.setText("" + seconds);
+    if(seconds==0){
+      countdownTimer.stop();
+      staticTimerLabel.setText("Time's up!");
+    }
   }
   
   /**
@@ -198,6 +205,8 @@ public class CelebrityPanel extends JPanel implements ActionListener{
    */
   public void addClue(String clue) {
     clueArea.setText("The clue is: " + clue);
+    countdownTimer.restart();
+    dynamicTimerLabel.setText(""+seconds);
   }
   
   /**
@@ -225,11 +234,14 @@ public class CelebrityPanel extends JPanel implements ActionListener{
 
   public void actionPerformed(ActionEvent ae){
     Object source = ae.getSource();
-    JButton clickedButton = (JButton) source;
-    String buttonText = clickedButton.getText();
-
-    if(buttonText.equals("Submit guess")){
-      updateScreen();
+    if(source instanceof Timer){
+      timerFires();
+    }else if(source instanceof JButton) {
+      JButton clickedButton = (JButton) source;
+      String buttonText = clickedButton.getText();
+      if (buttonText.equals("Submit guess")) {
+        updateScreen();
+      }
     }
   }
 }
