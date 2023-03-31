@@ -117,4 +117,9 @@ public class CelebrityGame {
 	public String sendClue() {
 		return gameCelebrity.getClue(); // stub
 	}
+
+	public void reset(){
+		celebGameList.clear();
+		gameWindow.reset();
+	}
 }
