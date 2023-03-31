@@ -110,7 +110,7 @@ public class CelebrityPanel extends JPanel implements ActionListener{
     success = "You guessed correctly!!! \nNext Celebrity clue is: ";
     tryAgain = "You have chosen poorly, try again!\nThe clue is: ";
     seconds = 60;
-
+    countdownTimer = new Timer(1000, null);
     setupPanel();
     setupLayout();
     setupListeners();
@@ -208,11 +208,18 @@ public class CelebrityPanel extends JPanel implements ActionListener{
     String attempt = guessField.getText();
     clueArea.append("\nYou guessed: " + attempt + "\n");
     if(controller.processGuess(attempt)){
-//      clueArea.setBackground(Color.CYAN);
-//      clueArea.append(success);
-      System.out.println("CORRECT");
+      clueArea.setBackground(Color.CYAN);
+      clueArea.append(success);
+      clueArea.append(controller.sendClue());
     }else{
-      System.out.println("INCORRECT");
+      clueArea.setBackground(Color.WHITE);
+      clueArea.append(tryAgain);
+      clueArea.append(controller.sendClue());
+    }
+    if(controller.getCelebrityGameSize()==0){
+      clueArea.append("\nNo more celebrities to guess.");
+      guessButton.setEnabled(false);
+      guessField.setEnabled(false);
     }
   }
 

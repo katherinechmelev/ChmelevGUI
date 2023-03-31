@@ -43,7 +43,14 @@ public class CelebrityGame {
 		guess = guess.trim().toLowerCase();
 		if(guess.equals(correctAnswer)){
 			celebGameList.remove(0);
-			if(celebGameList.size()>0)/////ENDED OFF HERE
+			if(celebGameList.size()>0){
+				gameCelebrity = celebGameList.get(0);
+			}else{
+				gameCelebrity = new Celebrity("", "");
+			}
+			return true;
+		}else{
+			return false;
 		}
 	}
 
